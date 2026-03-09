@@ -35,6 +35,13 @@ mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
         console.log('✅  MongoDB connected');
-        app.listen(PORT, () => console.log(`🚀  Server running on http://localhost:${PORT}`));
+        app.listen(PORT, () => {
+            console.log(`🚀  Server running on http://localhost:${PORT}`);
+            if (process.env.API_URL) {
+                const cronJob = require('./cron');
+                cronJob.start();
+                console.log('⏰  Cron job started to ping:', process.env.API_URL);
+            }
+        });
     })
     .catch(err => { console.error('❌  MongoDB connection failed:', err.message); process.exit(1); });
