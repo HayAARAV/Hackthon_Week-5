@@ -84,7 +84,7 @@ router.post('/', registrationLimiter, async (req, res) => {
                     secure: false,
                     auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
                 });
-                await transporter.sendMail({
+                transporter.sendMail({
                     from: `"HackBattle 2026" <${process.env.EMAIL_USER}>`,
                     to: lead.email,
                     subject: `🚀 Registration Confirmed — ${team.registrationId} | HackBattle 2026`,
@@ -100,8 +100,8 @@ router.post('/', registrationLimiter, async (req, res) => {
               <p style="color:#555;">Organised by Ignite Club · Team BugByte</p>
             </div>
           `,
-                });
-            } catch (_) { /* Email failure is non-blocking */ }
+                }).catch(err => console.error('Background email error:', err));
+            } catch (_) { /* Setup failure is non-blocking */ }
         }
 
         return res.status(201).json({

@@ -88,7 +88,7 @@ export default function Admin() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <RegStatusBadge />
-                        <a href={`/api/admin/${token}/export`} className="btn-primary" style={{ fontSize: '.82rem', padding: '10px 18px' }} target="_blank" rel="noreferrer">
+                        <a href={`${import.meta.env.VITE_API_URL || ''}/api/admin/${token}/export`} className="btn-primary" style={{ fontSize: '.82rem', padding: '10px 18px' }} target="_blank" rel="noreferrer">
                             ⬇ Export CSV
                         </a>
                     </div>
