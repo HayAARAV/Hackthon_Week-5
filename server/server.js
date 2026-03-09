@@ -18,6 +18,7 @@ app.use(mongoSanitize());
 app.use('/api/check-roll', require('./routes/rollcheck'));
 app.use('/api/register', require('./routes/register'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/login', require('./routes/login'));
 
 app.get('/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 

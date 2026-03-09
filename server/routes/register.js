@@ -64,7 +64,7 @@ router.post('/', registrationLimiter, async (req, res) => {
 
         // ── Registration closed check ─────────────────────────────
         const now = new Date();
-        const regOpen = new Date('2026-03-13T00:00:00+05:30');
+        const regOpen = new Date('2026-03-01T00:00:00+05:30');
         const regClose = new Date('2026-03-17T23:59:59+05:30');
         if (now < regOpen || now > regClose) {
             return res.status(400).json({ success: false, error: 'Registration is not currently open.' });

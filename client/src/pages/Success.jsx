@@ -1,4 +1,5 @@
 import { useLocation, Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 export default function Success() {
     const { state } = useLocation()
@@ -32,8 +33,35 @@ export default function Success() {
                 {/* Reg ID card */}
                 <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,92,26,.06)', border: '1px solid rgba(255,92,26,.25)', borderRadius: 16, marginBottom: '1.5rem' }}>
                     <div style={{ fontFamily: 'DM Mono,monospace', fontSize: '.7rem', letterSpacing: '.15em', color: 'var(--muted)', marginBottom: '.5rem', textTransform: 'uppercase' }}>Your Registration ID</div>
-                    <div style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: '2rem', color: 'var(--orange)', letterSpacing: '-.02em' }}>{registrationId}</div>
+                    <div
+                        onClick={() => {
+                            navigator.clipboard.writeText(registrationId)
+                            toast.success('Registration ID copied!')
+                        }}
+                        style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: '2rem', color: 'var(--orange)', letterSpacing: '-.02em', cursor: 'pointer' }}
+                        title="Click to copy"
+                    >
+                        {registrationId}
+                    </div>
                     <div style={{ fontFamily: 'DM Mono,monospace', fontSize: '.72rem', color: 'var(--muted)', marginTop: '.5rem' }}>Save this ID for event day</div>
+                    <div style={{ padding: '.5rem 1rem', background: 'rgba(255,255,255,0.05)', borderRadius: 8, marginTop: '1rem', display: 'inline-block', border: '1px solid rgba(255,255,255,0.1)' }}>
+                        <strong style={{ color: 'var(--text)', fontSize: '.85rem' }}>📸 Take a screenshot of this page for future reference.</strong>
+                    </div>
+                </div>
+
+                {/* WhatsApp Join section */}
+                <div className="card" style={{ textAlign: 'center', padding: '2rem', background: 'rgba(37, 211, 102, .04)', border: '1px solid rgba(37, 211, 102, .2)', borderRadius: 16, marginBottom: '1.5rem' }}>
+                    <h2 style={{ fontFamily: 'Syne,sans-serif', fontWeight: 700, fontSize: '1.2rem', color: '#25D366', marginBottom: '1rem' }}>Join the WhatsApp Group</h2>
+                    <p style={{ color: 'var(--text)', opacity: 0.9, fontSize: '.9rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+                        Scan the QR code below to join the official HackBattle WhatsApp group for important updates and announcements.
+                    </p>
+                    <div style={{ background: '#fff', padding: '1rem', borderRadius: 12, display: 'inline-block', marginBottom: '1.5rem' }}>
+                        <img src="/qr.jpeg" alt="WhatsApp Group QR Code" style={{ width: 150, height: 150, display: 'block', borderRadius: 8 }} />
+                    </div>
+                    <div style={{ fontFamily: 'DM Mono,monospace', fontSize: '.8rem', color: 'var(--muted)', marginBottom: '.75rem' }}>Can't scan?</div>
+                    <a href="https://chat.whatsapp.com/Gh4VKwjHaBf8hTb44luK6n?mode=gi_t" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#25D366', color: '#fff', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '.9rem', boxShadow: '0 4px 14px rgba(37, 211, 102, 0.3)' }}>
+                        Click here to join directly
+                    </a>
                 </div>
 
                 {/* Team details */}

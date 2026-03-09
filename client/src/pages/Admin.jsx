@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import NotFound from './NotFound'
 
-const REG_OPEN = new Date('2026-03-13T00:00:00+05:30')
+const REG_OPEN = new Date('2026-03-01T00:00:00+05:30')
 const REG_CLOSE = new Date('2026-03-17T23:59:59+05:30')
 
 function RegStatusBadge() {

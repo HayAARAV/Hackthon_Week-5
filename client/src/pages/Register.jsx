@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const TRACKS = ['Healthcare', 'Agriculture', 'Finance', 'Artificial Intelligence', 'Student Innovation']
 const ROLL_REGEX = /^[0-9]{4}[A-Z]{2,5}[0-9]{3}$/
 
-// Registration is open 13–17 March 2026
-const REG_OPEN = new Date('2026-03-13T00:00:00+05:30')
+// Registration is open 01–17 March 2026
+const REG_OPEN = new Date('2026-03-01T00:00:00+05:30')
 const REG_CLOSE = new Date('2026-03-17T23:59:59+05:30')
 
 function isRegOpen() {
@@ -105,7 +106,11 @@ export default function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         const errs = validate()
-        if (Object.keys(errs).length) { setErrors(errs); return }
+        if (Object.keys(errs).length) {
+            setErrors(errs);
+            toast.error('Please fix the errors in the form.');
+            return;
+        }
         setErrors({})
         setSubmitError('')
         setSubmitting(true)
@@ -116,9 +121,12 @@ export default function Register() {
                 problemStatement: form.problemStatement.trim(),
                 members: form.members.map((m, i) => ({ ...m, isLead: i === 0 })),
             })
+            toast.success('Registration successful!')
             navigate('/success', { state: data })
         } catch (err) {
-            setSubmitError(err?.response?.data?.error || 'Registration failed. Please try again.')
+            const errorMsg = err?.response?.data?.error || 'Registration failed. Please try again.'
+            setSubmitError(errorMsg)
+            toast.error(errorMsg)
         } finally {
             setSubmitting(false)
         }
