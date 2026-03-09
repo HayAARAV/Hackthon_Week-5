@@ -4,7 +4,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 const TRACKS = ['Healthcare', 'Agriculture', 'Finance', 'Artificial Intelligence', 'Student Innovation']
-const ROLL_REGEX = /^[0-9]{4}[A-Z]{2,5}[0-9]{3}$/
+const ROLL_REGEX = /^[0-9]{4}[a-zA-Z]{2,5}[0-9]{3}$/
 
 // Registration is open 01–17 March 2026
 const REG_OPEN = new Date('2026-03-01T00:00:00+05:30')

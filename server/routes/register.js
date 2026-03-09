@@ -4,7 +4,7 @@ const Team = require('../models/Team');
 const { registrationLimiter } = require('../middleware/rateLimiter');
 const nodemailer = require('nodemailer');
 
-const ROLL_REGEX = /^[0-9]{4}[A-Z]{2,5}[0-9]{3}$/;
+const ROLL_REGEX = /^[0-9]{4}[a-zA-Z]{2,5}[0-9]{3}$/;
 
 // POST /api/register
 router.post('/', registrationLimiter, async (req, res) => {
