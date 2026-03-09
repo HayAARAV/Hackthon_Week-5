@@ -275,9 +275,9 @@ export default function Register() {
                         ))}
 
                         {form.members.length < 4 && (
-                            <button type="button" onClick={addMember} style={{ width: '100%', padding: '12px', background: 'transparent', border: '1px dashed var(--border)', borderRadius: 8, color: 'var(--muted)', fontFamily: 'DM Mono,monospace', fontSize: '.78rem', letterSpacing: '.1em', cursor: 'pointer', transition: 'border-color .2s, color .2s' }}
+                            <button type="button" onClick={addMember} style={{ width: '100%', padding: '12px', background: 'transparent', border: '1px dashed var(--border)', borderRadius: 8, color: '#fff', fontFamily: 'DM Mono,monospace', fontSize: '.78rem', letterSpacing: '.1em', cursor: 'pointer', transition: 'border-color .2s, color .2s' }}
                                 onMouseEnter={e => { e.target.style.borderColor = 'var(--orange)'; e.target.style.color = 'var(--orange)' }}
-                                onMouseLeave={e => { e.target.style.borderColor = ''; e.target.style.color = '' }}>
+                                onMouseLeave={e => { e.target.style.borderColor = ''; e.target.style.color = '#fff' }}>
                                 + ADD MEMBER ({form.members.length}/4)
                             </button>
                         )}

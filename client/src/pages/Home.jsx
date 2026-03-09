@@ -125,16 +125,57 @@ export default function Home() {
                 <div className="section-label">Tracks</div>
                 <h2 className="section-title">Choose Your Domain</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(min(100%,190px),1fr))', gap: '1rem' }}>
-                    {TRACKS.map(t => (
-                        <div key={t.name} className="card" style={{ position: 'relative', overflow: 'hidden', transition: 'transform .3s,border-color .3s' }}
-                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(255,92,26,.4)'; }}
-                            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.borderColor = ''; }}>
-                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(to right,var(--orange),transparent)' }} />
-                            <div style={{ fontSize: '2rem', marginBottom: '.75rem' }}>{t.icon}</div>
-                            <h3 style={{ fontFamily: 'Syne,sans-serif', fontWeight: 700, fontSize: '1rem', marginBottom: '.5rem' }}>{t.name}</h3>
-                            <p style={{ color: 'var(--muted)', fontSize: '.82rem', lineHeight: 1.6 }}>{t.desc}</p>
-                        </div>
-                    ))}
+                    {TRACKS.map(t => {
+                        const START_TIME = new Date('2026-03-18T11:00:00+05:30')
+                        const isLive = new Date() >= START_TIME
+                        return (
+                            <div key={t.name} className="card" style={{ position: 'relative', overflow: 'hidden', transition: 'transform .3s,border-color .3s' }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(255,92,26,.4)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.borderColor = ''; }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(to right,var(--orange),transparent)' }} />
+                                <div style={{ fontSize: '2rem', marginBottom: '.75rem' }}>{t.icon}</div>
+                                <h3 style={{ fontFamily: 'Syne,sans-serif', fontWeight: 700, fontSize: '1rem', marginBottom: '.5rem' }}>{t.name}</h3>
+                                <div style={{ position: 'relative' }}>
+                                    <p style={{
+                                        color: 'var(--muted)',
+                                        fontSize: '.82rem',
+                                        lineHeight: 1.6,
+                                        filter: isLive ? 'none' : 'blur(5px)',
+                                        userSelect: isLive ? 'auto' : 'none',
+                                        pointerEvents: isLive ? 'auto' : 'none',
+                                        transition: 'filter 0.5s'
+                                    }}>
+                                        {t.desc}
+                                    </p>
+                                    {!isLive && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            pointerEvents: 'none'
+                                        }}>
+                                            <span style={{
+                                                fontFamily: 'DM Mono,monospace',
+                                                fontSize: '.62rem',
+                                                letterSpacing: '.05em',
+                                                color: 'var(--orange)',
+                                                background: 'rgba(255,92,26,0.1)',
+                                                padding: '4px 10px',
+                                                borderRadius: 100,
+                                                border: '1px solid rgba(255,92,26,0.3)',
+                                                backdropFilter: 'blur(4px)',
+                                                whiteSpace: 'nowrap'
+                                            }}>
+                                                Reveals 18 March
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
             </section>
 
