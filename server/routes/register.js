@@ -74,35 +74,7 @@ router.post('/', registrationLimiter, async (req, res) => {
         const team = new Team({ teamName: teamName.trim(), track, problemStatement: problemStatement.trim(), members });
         await team.save();
 
-        // ── Send confirmation email ───────────────────────────────
-        const lead = members.find(m => m.isLead) || members[0];
-        if (process.env.EMAIL_USER && lead.email) {
-            try {
-                const transporter = nodemailer.createTransport({
-                    host: process.env.EMAIL_HOST,
-                    port: Number(process.env.EMAIL_PORT),
-                    secure: false,
-                    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-                });
-                transporter.sendMail({
-                    from: `"HackBattle 2026" <${process.env.EMAIL_USER}>`,
-                    to: lead.email,
-                    subject: `🚀 Registration Confirmed — ${team.registrationId} | HackBattle 2026`,
-                    html: `
-            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
-              <h2 style="color:#ff5c1a;">HackBattle 2026 — Registration Confirmed!</h2>
-              <p>Hi <strong>${lead.name}</strong>,</p>
-              <p>Your team <strong>${team.teamName}</strong> has been successfully registered for <strong>HackBattle 2026</strong>.</p>
-              <p><strong>Registration ID:</strong> <code style="background:#f4f4f4;padding:2px 8px;border-radius:4px;">${team.registrationId}</code></p>
-              <p><strong>Track:</strong> ${team.track}</p>
-              <hr>
-              <p style="color:#555;">Event: 18th March 2026, 11:00 AM — Vishveshwarya Group of Institutions</p>
-              <p style="color:#555;">Organised by Ignite Club · Team BugByte</p>
-            </div>
-          `,
-                }).catch(err => console.error('Background email error:', err));
-            } catch (_) { /* Setup failure is non-blocking */ }
-        }
+
 
         return res.status(201).json({
             success: true,

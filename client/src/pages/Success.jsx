@@ -88,12 +88,6 @@ export default function Success() {
                     </div>
                 </div>
 
-                {/* Email note */}
-                {lead?.email && (
-                    <div style={{ padding: '.75rem 1rem', background: 'rgba(6,214,160,.06)', border: '1px solid rgba(6,214,160,.2)', borderRadius: 8, marginBottom: '1.5rem', fontSize: '.82rem', color: 'var(--green)' }}>
-                        📧 Confirmation email sent to <strong>{lead.email}</strong>
-                    </div>
-                )}
 
                 <div style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--muted)', fontSize: '.82rem' }}>
                     Event: <strong style={{ color: 'var(--text)' }}>18th March 2026, 11:00 AM</strong> · Vishveshwarya Group of Institutions
