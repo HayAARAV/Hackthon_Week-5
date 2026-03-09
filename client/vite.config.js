@@ -12,3 +12,5 @@ export default defineConfig({
         },
     },
 })
+
+// triggered dev server restart for env vars
